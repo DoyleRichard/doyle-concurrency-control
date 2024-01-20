@@ -13,7 +13,6 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
         return [];
     }
 
-    const res = [];
     // 包装一下，可以返回 index 标识，方便知道每次最先完成的 Promise 是谁
     const _promiseReqArray = promiseReqArray.map((_, index) => {
         return {
@@ -24,8 +23,10 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
             },
         };
     });
+
     const pool = [];
     const pollKeyMap = [];
+    const res = new Array(promiseReqArray.length).fill(null);
 
     for (let idx = 0; idx < promiseReqArray.length; idx++) {
         if (pool.length < limitNum) {
@@ -39,14 +40,14 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
                 currentIdx: idx,
                 _promiseReqArray,
             });
-            res.push(promiseRes);
+            res[preIdx] = promiseRes;
         }
     }
 
     while (pool.length) {
         const { idx: preIdx, promiseRes } = await Promise.race(pool);
         updatePool({ pool, pollKeyMap, preIdx });
-        res.push(promiseRes);
+        res[preIdx] = promiseRes;
     }
 
     return res;
