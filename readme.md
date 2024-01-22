@@ -39,3 +39,7 @@ ConcurrencyControl(promiseReqArray).then((res) => {
     console.log(res);
 });
 ```
+
+![Alt text](./image/example-1.png)
+
+![Alt text](./image/example-2.png)
