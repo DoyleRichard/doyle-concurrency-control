@@ -1,1 +1,5 @@
 image
+.gitignore
+package-lock.json
+index.ts
+tsconfig.json

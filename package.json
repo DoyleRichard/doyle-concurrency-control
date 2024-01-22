@@ -1,10 +1,14 @@
 {
     "name": "doyle-concurrency-control",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "description": "控制浏览器发生请求的并发数量",
     "main": "index.js",
+    "typings": "index.d.ts",
     "author": "doylerichard",
     "license": "MIT",
+    "scripts": {
+        "build": "tsc -P tsconfig.json"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/DoyleRichard/doyle-concurrency-control"
@@ -16,5 +20,7 @@
         "of",
         "control"
     ],
-    "dependencies": {}
+    "dependencies": {
+        "typescript": "^5.3.3"
+    }
 }
