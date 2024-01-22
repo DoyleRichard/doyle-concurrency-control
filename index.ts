@@ -3,10 +3,10 @@ type _promiseReqType<T> = { promiseIdx: number, promiseReq: () => _promiseReq<T>
 type _promiseReq<T> = Promise<{ idx: number, promiseRes: resType<T> }>
 /**
  * ConcurrencyControl
- * @description Promise<Array<any>>
- * @param {Array< () => Promise<T> >} promiseReqArray
- * @param {number} limitNum default 3
- * @returns {Array<{ res: T, status: 'fulfilled' | 'reject' }>} response
+ * @description 限制同时发生的 Promise 数量
+ * @param promiseReqArray Promise Require Function List
+ * @param limitNum [optional] default 3
+ * @returns Promise Result List
  */
 async function ConcurrencyControl<T>(promiseReqArray: (() => Promise<T>)[], limitNum: number = 3): Promise<resType<T>[]> {
     let legalParam = paramJudge(promiseReqArray, limitNum);

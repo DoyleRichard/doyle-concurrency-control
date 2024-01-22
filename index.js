@@ -38,10 +38,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * ConcurrencyControl
- * @description Promise<Array<any>>
- * @param {Array< () => Promise<T> >} promiseReqArray
- * @param {number} limitNum default 3
- * @returns {Array<{ res: T, status: 'fulfilled' | 'reject' }>} response
+ * @description 限制同时发生的 Promise 数量
+ * @param promiseReqArray Promise Require Function List
+ * @param limitNum [optional] default 3
+ * @returns Promise Result List
  */
 function ConcurrencyControl(promiseReqArray, limitNum) {
     if (limitNum === void 0) { limitNum = 3; }

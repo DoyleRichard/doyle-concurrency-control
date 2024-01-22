@@ -4,10 +4,10 @@ type resType<T> = {
 };
 /**
  * ConcurrencyControl
- * @description Promise<Array<any>>
- * @param {Array< () => Promise<T> >} promiseReqArray
- * @param {number} limitNum default 3
- * @returns {Array<{ res: T, status: 'fulfilled' | 'reject' }>} response
+ * @description 限制同时发生的 Promise 数量
+ * @param promiseReqArray Promise Require Function List
+ * @param limitNum [optional] default 3
+ * @returns Promise Result List
  */
 declare function ConcurrencyControl<T>(promiseReqArray: (() => Promise<T>)[], limitNum?: number): Promise<resType<T>[]>;
 export default ConcurrencyControl;
