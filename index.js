@@ -41,7 +41,13 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
         if (pool.length < limitNum) {
             updatePool({ pool, pollKeyMap, currentIdx: idx, _promiseReqArray });
         } else {
-            const { idx: preIdx, promiseRes } = await Promise.race(pool);
+            let pollRes = null
+            try {
+                pollRes = await Promise.race(pool)
+            } catch (e) {
+                pollRes = e
+            }
+            const { idx: preIdx, promiseRes } = pollRes
             updatePool({
                 pool,
                 pollKeyMap,
@@ -54,7 +60,13 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
     }
 
     while (pool.length) {
-        const { idx: preIdx, promiseRes } = await Promise.race(pool);
+        let pollRes = null
+        try {
+            pollRes = await Promise.race(pool)
+        } catch (e) {
+            pollRes = e
+        }
+        const { idx: preIdx, promiseRes } = pollRes
         updatePool({ pool, pollKeyMap, preIdx });
         res[preIdx] = promiseRes;
     }

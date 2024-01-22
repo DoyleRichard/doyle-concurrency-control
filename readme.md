@@ -1,3 +1,5 @@
+##### 控制同时请求的数量
+
 ### 示例
 
 ```javascript
@@ -28,11 +30,13 @@ const promiseReqArray = [
 
 // 自定义最大并发 2
 ConcurrencyControl(promiseReqArray, 2).then((res) => {
+    // res: Array<{ res: any, status: 'fulfilled' | 'reject' }>
     console.log(res);
 });
 
 // 默认最大并发 3
 ConcurrencyControl(promiseReqArray).then((res) => {
+    // res: Array<{ res: any, status: 'fulfilled' | 'reject' }>
     console.log(res);
 });
 ```
