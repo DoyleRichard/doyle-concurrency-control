@@ -1,26 +1,26 @@
-# 轻量，兼容TS，可控 Promise 并发数量的 npm 包
+### 轻量，兼容TS，可控 Promise 并发数量的 npm 包
 
 
-## 安装
+#### 安装
 
 ```bash
 npm i doyle-concurrency-control
 ```
 
 
-## 功能简述
+#### 功能简述
 
 可以用来控制 Promise 的并发数量
 
 
 
-## 应用场景
+#### 应用场景
 
 可以限制请求的并发数
 
 
 
-## 使用示例
+#### 使用示例
 
 ```javascript
 import ConcurrencyControl from "doyle-concurrency-control";
