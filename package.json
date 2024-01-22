@@ -1,6 +1,6 @@
 {
     "name": "doyle-concurrency-control",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "description": "限制同时发生的 Promise 数量",
     "main": "index.js",
     "typings": "index.d.ts",
