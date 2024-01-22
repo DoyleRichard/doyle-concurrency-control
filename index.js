@@ -1,11 +1,9 @@
-"use strict";
-
 /**
  * ConcurrencyControl
  * @description Promise<Array<any>>
  * @param {Array<Function>} promiseReqArray
  * @param {Number} limitNum default 3
- * @returns {Array} response
+ * @returns {Array<{ res: any, status: 'fulfilled' | 'reject' }>} response
  */
 async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
     let legalParam = paramJudge(promiseReqArray, limitNum);
@@ -18,7 +16,18 @@ async function ConcurrencyControl(promiseReqArray, limitNum = 3) {
         return {
             promiseIdx: index,
             promiseReq: async () => {
-                const promiseRes = await _();
+                let promiseRes = null
+                try {
+                    promiseRes = {
+                        res: await _(),
+                        status: 'fulfilled'
+                    }
+                } catch (error) {
+                    promiseRes = {
+                        res: error,
+                        status: 'reject'
+                    }
+                }
                 return { idx: index, promiseRes };
             },
         };
